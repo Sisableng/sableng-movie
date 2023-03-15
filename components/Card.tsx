@@ -13,6 +13,7 @@ export default function Card({ movie }: Props) {
           loading="lazy"
           src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
           className="h-full w-full object-cover object-center transition-all ease-out group-hover:scale-125"
+          alt=""
         />
       </div>
     </>
