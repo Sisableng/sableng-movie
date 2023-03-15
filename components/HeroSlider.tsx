@@ -8,6 +8,8 @@ import { ExclamationCircleIcon, PlayIcon } from "@heroicons/react/24/outline";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { useRecoilState } from "recoil";
+import { modalState, movieState } from "@/atoms/modalAtom";
 
 interface Props {
   netflixOriginals: Movie[];
@@ -16,6 +18,8 @@ interface Props {
 export default function HeroSlider({ netflixOriginals }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [showModal, setShowModal] = useRecoilState(modalState);
+  const [currentMovie, setCurrentMovie] = useRecoilState(movieState);
 
   useEffect(() => {
     setMovies(netflixOriginals.slice(0, 10));
@@ -67,7 +71,13 @@ export default function HeroSlider({ netflixOriginals }: Props) {
                 <button className="btn-banner">
                   <PlayIcon className="h-4 w-4" /> Play
                 </button>
-                <button className="btn-banner">
+                <button
+                  className="btn-banner"
+                  onClick={() => {
+                    setCurrentMovie(movie);
+                    setShowModal(true);
+                  }}
+                >
                   <ExclamationCircleIcon className="h-4 w-4" /> Detail
                 </button>
               </div>

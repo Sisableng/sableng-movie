@@ -2,6 +2,9 @@ import HeroSlider from "@/components/HeroSlider";
 import Row from "@/components/Row";
 import { Movie } from "@/typings";
 import requests from "@/utils/requests";
+import { useRecoilValue } from "recoil";
+import { modalState } from "@/atoms/modalAtom";
+import Modal from "@/components/Modal";
 
 interface Props {
   netflixOriginals: Movie[];
@@ -24,22 +27,26 @@ const Home = ({
   topRated,
   trendingNow,
 }: Props) => {
+  const showModal = useRecoilValue(modalState);
   return (
-    <>
-      <section className="container mt-24 min-h-screen">
-        <HeroSlider netflixOriginals={netflixOriginals} />
-        <div className="mt-20 space-y-10 md:space-y-20">
-          <Row title="Lagi Trend" movies={trendingNow} />
-          <Row title="Top Rating" movies={topRated} />
-          <Row title="Thriller Aksi" movies={actionMovies} />
+    <div className="relative">
+      <main>
+        <section className="container mt-24 min-h-screen">
+          <HeroSlider netflixOriginals={netflixOriginals} />
+          <div className="mt-20 space-y-10 md:space-y-20">
+            <Row title="Lagi Trend" movies={trendingNow} />
+            <Row title="Top Rating" movies={topRated} />
+            <Row title="Thriller Aksi" movies={actionMovies} />
 
-          <Row title="Komedi" movies={comedyMovies} />
-          <Row title="Horror" movies={horrorMovies} />
-          <Row title="Romantis" movies={romanceMovies} />
-          <Row title="Dokumentasi" movies={documentaries} />
-        </div>
-      </section>
-    </>
+            <Row title="Komedi" movies={comedyMovies} />
+            <Row title="Horror" movies={horrorMovies} />
+            <Row title="Romantis" movies={romanceMovies} />
+            <Row title="Dokumentasi" movies={documentaries} />
+          </div>
+        </section>
+      </main>
+      {showModal && <Modal />}
+    </div>
   );
 };
 
