@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
 import { Bars2Icon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
-export default function navbar() {
+export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
